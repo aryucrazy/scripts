@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "Ask Me !!"
+read que
+
+ tgpt -q "Answer should be without fullstop, $que" > ~/.cache/ans.txt 
+
+cat ~/.cache/ans.txt
+
+
+cat ~/.cache/ans.txt | \
+  ./piper --model en_US-libritts-high.onnx --output-raw | \
+  aplay -r 22050 -f S16_LE -t raw - >/dev/null
+
+
